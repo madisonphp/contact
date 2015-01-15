@@ -56,9 +56,9 @@ $app->match('/', function(Request $request) use($app) {
         try {
             $message = \Swift_Message::newInstance()
                 ->setSubject('Madison PHP Conference Comment')
-                ->setFrom(array($data['email'] => $data['fullname']))
+                // ->setFrom(array('' => $data['fullname']))
                 ->setTo(array('andrew@andrewshell.org'))
-                ->setBody($data['message']);
+                ->setBody($app['twig']->render('email.twig.txt', $data));
 
             $app['mailer']->send($message);
             $sent = true;
