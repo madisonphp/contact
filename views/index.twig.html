@@ -1,0 +1,17 @@
+{% extends "layout.twig.html" %}
+
+{% if form is defined %}
+    {% form_theme form 'form/fields.twig.html' %}
+{% endif %}
+
+{% block content %}
+<div class="container">
+<h2>Contact</h2>
+{% if sent %}
+<p>Thank you for contacting us.</p>
+{% else %}
+<p>We would love to hear from you. Let us know if you have any questions or if you are interested in becoming a sponsor for Madison PHP Conference.</p>
+{{ form(form, {'action': path('home'), 'method': 'POST'}) }}
+{% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{
+    "name": "madisonphp/conference2015",
+    "description": "Website for 2015 Madison PHP Conference",
+    "license": "MIT",
+    "type": "project",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Madison PHP",
+            "email": "conference@madisonphp.com"
+        }
+    ],
+    "require": {
+        "pimple/pimple": "3.0.*@dev",
+        "silex/silex": "2.0.*@dev",
+        "swiftmailer/swiftmailer": "~5.3",
+        "symfony/config": "~2.4",
+        "symfony/form": "~2.4",
+        "symfony/security-csrf": "~2.4",
+        "symfony/translation": "~2.4",
+        "symfony/twig-bridge": "~2.4",
+        "symfony/validator": "~2.4",
+        "symfony/yaml": "~2.4"
+    }
+}
