@@ -71,5 +71,14 @@ $app->match('/', function(Request $request) use($app) {
         }
     }
 
-    return $app['twig']->render('index.twig.html', array('form' => $form->createView(), 'sent' => $sent, 'error' => $error));
+    return $app['twig']->render(
+        'index.twig.html',
+        array(
+            'nav' => $app['nav'],
+            'active' => 'Contact',
+            'form' => $form->createView(),
+            'sent' => $sent,
+            'error' => $error
+        )
+    );
 })->bind('home');

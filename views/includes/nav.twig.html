@@ -10,7 +10,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li{% if active == 'home' %} class="active"{% endif %}><a href="{{ path('home') }}">Home</a></li>
+                {% for name, href in nav %}
+                <li{% if active == name %} class="active"{% endif %}><a href="{{ href }}">{{ name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>
