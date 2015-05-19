@@ -13,6 +13,7 @@ $app->error(function (\Swift_TransportException $e, $code) {
 
 $app->match('/', function(Request $request) use($app) {
     $sent = false;
+    $error = false;
 
     $default = array(
         'fullname' => '',
@@ -56,16 +57,17 @@ $app->match('/', function(Request $request) use($app) {
         try {
             $message = \Swift_Message::newInstance()
                 ->setSubject('Madison PHP Conference Comment')
-                // ->setFrom(array('' => $data['fullname']))
-                ->setTo(array('andrew@andrewshell.org'))
-                ->setBody($app['twig']->render('email.twig.txt', $data));
+                ->setFrom(array('conference@madisonphp.com' => 'Madison PHP Contact Form'))
+                ->setTo(array('conference@madisonphp.com'))
+                ->setReplyTo(array($data['email'] => $data['fullname']))
+                ->setBody($app['twig']->render('email.twig.html', $data), 'text/html')
+                ->addPart($app['twig']->render('email.twig.txt', $data), 'text/plain');
 
             $app['mailer']->send($message);
-            $sent = true;
         } catch (\Exception $e) {
-
+            $error = $e->getMessage();
         }
     }
 
-    return $app['twig']->render('index.twig.html', array('form' => $form->createView(), 'sent' => $sent));
+    return $app['twig']->render('index.twig.html', array('form' => $form->createView(), 'sent' => $sent, 'error' => $error));
 })->bind('home');

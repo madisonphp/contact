@@ -1,0 +1,6 @@
+---
+swiftmailer:
+    host: localhost
+    port: 25
+    username: whipple
+    password: squeeze
