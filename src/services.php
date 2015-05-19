@@ -8,8 +8,6 @@ $yaml = new Parser();
 
 $config = $yaml->parse(file_get_contents(__DIR__ . '/../config.yaml'));
 
-die("<pre>" . print_r($config, true));
-
 $app['swiftmailer.options'] = array(
     'host' => $config['swiftmailer']['host'],
     'port' => $config['swiftmailer']['port'],
