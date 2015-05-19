@@ -64,6 +64,8 @@ $app->match('/', function(Request $request) use($app) {
                 ->addPart($app['twig']->render('email.twig.txt', $data), 'text/plain');
 
             $app['mailer']->send($message);
+
+            $sent = true;
         } catch (\Exception $e) {
             $error = $e->getMessage();
         }
