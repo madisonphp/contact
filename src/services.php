@@ -19,11 +19,11 @@ $published_menu = array(
     'Home' => 'http://2015.madisonphpconference.com/',
     //'Schedule' => 'http://2015.madisonphpconference.com/schedule/',
     //'Speakers' => '/speakers/',
-    'Venue' => 'http://2015.madisonphpconference.com/venue/',
-    'Hotel' => 'http://2015.madisonphpconference.com/hotel/',
-    //'Sponsors' => 'http://2015.madisonphpconference.com/sponsors/',
+    'Venue/Hotel' => 'http://2015.madisonphpconference.com/venue/',
+    'Sponsors' => 'http://2015.madisonphpconference.com/sponsors/',
     'What to Expect' => 'http://2015.madisonphpconference.com/expect/',
-    'Organizers' => 'http://2015.madisonphpconference.com/organizers/',
+    'Tickets' => 'http://2015.madisonphpconference.com/tickets/',
+    'Call for Papers' => 'http://cfp.madisonphpconference.com',
     'Code of Conduct' => 'http://2015.madisonphpconference.com/conduct/',
     'Contact' => '/'
 );
