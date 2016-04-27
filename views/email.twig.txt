@@ -1,5 +1,0 @@
-Full Name: {{ fullname }}
-Email Address: {{ email }}
-Phone: {{ phone }}
-Question/Message:
-{{ message }}
