@@ -38,8 +38,12 @@ h1, h2, h3, h4 {
     background-position: center bottom;
     border-bottom: 5px solid #b70610;
     color: #fff;
-    height: 360px;
-    padding: 70px 0;
+    height: 260px;
+    padding: 55px 0;
+}
+
+#content {
+    padding: 10px 10px 10px 30px;
 }
 
 footer {

@@ -29,10 +29,21 @@
 </head>
 <body>
 
+<div class="jumbotron text-center" role="banner">
+   <div class="container">
+      <h1><img src="/images/conf-logo.png" class="img-responsive" alt="Madison PHP Conference"></h1>
+      <ul class="list-inline">
+         <li>Share On</li>
+         <li><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=http://2016.madisonphpconference.com/&amp;p[images][0]=http://2016.madisonphpconference.com/mysite/images/madison-php-shareable.jpg&amp;p[title]=+&amp;p[summary]=Madison PHP" class="btn btn-default btn-xs"><span class="fa fa-facebook" aria-hidden="true"></span> facebook</a></li>
+         <li><a target="_blank" href="https://twitter.com/intent/tweet?url=http://2016.madisonphpconference.com/&amp;text=Madison PHP Conference&amp;via=MadisonPHP" class="btn btn-default btn-xs"><span class="fa fa-twitter" aria-hidden="true"></span> twitter</a></li>
+      </ul>
+   </div>
+</div>
+<div id="content">
 
 <?php
 
-/*
+
 require_once 'Zend/Mail.php';
    $mail = new Zend_Mail();
    
@@ -55,7 +66,7 @@ $efs_sendName = "Madison PHP Conference";
 $efs_siteName = "Madison PHP Conference";
 $efs_filler_subject = "E-mail from the Madison PHP Conference Website";
 $mail->setFrom("noreply@madisonphpconference.com", "$efs_name");
-$thankYou = "<p>Thank you, your message has been sent.</p>";
+$thankYou = '<p>Thank you, your message has been sent.</p><p><a href="http://www.madisonphpconference.com">Return to the Conference website.</a></p>';
 
 /* ******************************************************
 End change vars for new install
@@ -66,6 +77,8 @@ if($efs_submit == "Send") {
    if (!$efs_email) { $efs_error[] = "Please enter your E-mail Address."; }
    if (!filter_var($efs_email, FILTER_VALIDATE_EMAIL)) { $efs_error[] = "Please check what you entered in the E-mail Address field. It is not a valid e-mail address."; }
    if (!$efs_message) { $efs_error[] = "Please enter your Message."; }
+   if (strpos($efs_message,'[link=') !== false) { $efs_error[] = "Please do not include code in your Message."; }
+   if (strpos($efs_message,'[url=') !== false) { $efs_error[] = "Please do not include code in your Message."; }
 
    if(is_array($efs_error)) {
       echo "<ul>";
@@ -100,7 +113,7 @@ if(empty($efs_subject)) {
    echo "$thankYou";
 }   
 else {
-   echo "Send us an e-mail:<br />
+   echo "Send an e-mail to the Madison PHP Conference organizers:<br />
    <form action=\"{$_SERVER['REQUEST_URI']}\" method=\"post\">
    <p><strong>Name</strong><br />
    <input type=\"text\" name=\"name\" value=\"$efs_name\" maxlength=\"250\" size=\"100\" /></p>
@@ -113,3 +126,9 @@ else {
    <p><input type=\"submit\" name=\"submit\" value=\"Send\" /></p>
    </form>";
 }
+
+?>
+
+</div>
+
+</body></html>
