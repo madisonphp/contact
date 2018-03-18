@@ -44,9 +44,6 @@
 <?php
 
 
-require_once 'Zend/Mail.php';
-   $mail = new Zend_Mail();
-   
 if($_POST['submit'] == "Send") {
    $efs_name = htmlentities(strip_tags($_POST['name']));
    $efs_email = htmlentities(strip_tags($_POST['email']));
@@ -100,15 +97,14 @@ Message: $efs_message
 Sent from the $efs_siteName site
 ";
 
-    $mail->setBodyText($efs_content);
-    $mail->setReplyTo($efs_email, $efs_name);
-if(empty($efs_subject)) {
-    $mail->setSubject($efs_filler_subject);
-}else {
-    $mail->setSubject($efs_subject);
-}
-    $mail->addTo($efs_sendto, $efs_sendName);
-    $mail->send();
+
+   if(empty($efs_subject)) {
+      $mailSubject = $efs_filler_subject;
+   }else {
+      $mailSubject = $efs_subject;
+   }
+   $mailReplyto = "$efs_name <$efs_email>";
+mail($efs_sendto, $mailSubject, $efs_content);
 
    echo "$thankYou";
 }   
