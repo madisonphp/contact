@@ -62,7 +62,6 @@ $efs_sendto = "team@madisonphpconference.com";
 $efs_sendName = "Madison PHP Conference";
 $efs_siteName = "Madison PHP Conference";
 $efs_filler_subject = "E-mail from the Madison PHP Conference Website";
-$mail->setFrom("noreply@madisonphpconference.com", "$efs_name");
 $thankYou = '<p>Thank you, your message has been sent.</p><p><a href="http://www.madisonphpconference.com">Return to the Conference website.</a></p>';
 
 /* ******************************************************
@@ -103,8 +102,11 @@ Sent from the $efs_siteName site
    }else {
       $mailSubject = $efs_subject;
    }
-   $mailReplyto = "$efs_name <$efs_email>";
-mail($efs_sendto, $mailSubject, $efs_content);
+
+   $mailHeaders = "Reply-To: $efs_name <$efs_email>" . "\r\n" .
+       "From: $efs_name <noreply@madisonphpconference.com>";
+
+   mail($efs_sendto, $mailSubject, $efs_content, $mailHeaders);
 
    echo "$thankYou";
 }   
