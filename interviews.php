@@ -72,9 +72,9 @@
         if (!$efs_location) { $efs_error[] = "Please enter your General Location."; }
         if (strpos($efs_location,'[link=') !== false) { $efs_error[] = "Please do not include code in your General Location."; }
         if (strpos($efs_location,'[url=') !== false) { $efs_error[] = "Please do not include code in your General Location."; }
-        if (!$efs_message) { $efs_error[] = "Please enter your Message."; }
-        if (strpos($efs_message,'[link=') !== false) { $efs_error[] = "Please do not include code in your Message."; }
-        if (strpos($efs_message,'[url=') !== false) { $efs_error[] = "Please do not include code in your Message."; }
+        if (!$efs_message) { $efs_error[] = "Please enter your Job Description."; }
+        if (strpos($efs_message,'[link=') !== false) { $efs_error[] = "Please do not include code in your Job Description."; }
+        if (strpos($efs_message,'[url=') !== false) { $efs_error[] = "Please do not include code in your Job Description."; }
 
         if(is_array($efs_error)) {
             echo "<ul>";
@@ -134,7 +134,7 @@
    <input type=\"text\" name=\"phone\" value=\"$efs_phone\" maxlength=\"25\" size=\"25\" /></p>
    <p><strong>General Location</strong> (Example: East side of Madison, Middleton, Watertown, etc.<br />
    <input type=\"text\" name=\"location\" value=\"$efs_location\" maxlength=\"250\" size=\"100\" /></p>
-   <p><strong>Give us a brief description of the kind of job you are looking for:</strong><br />
+   <p><strong>Job Description</strong> (Give us a brief description of the kind of job you are looking for)<br />
    <input name=\"message\" value=\"$efs_message\" maxlength=\"250\" size=\"100\" /></p>
    <p><input type=\"submit\" name=\"submit\" value=\"Send\" /></p>
    </form>";
