@@ -62,7 +62,7 @@ $efs_sendto = "team@madisonphpconference.com";
 $efs_sendName = "Madison PHP Conference";
 $efs_siteName = "Madison PHP Conference";
 $efs_filler_subject = "E-mail from the Madison PHP Conference Website";
-$thankYou = '<p>Thank you, your message has been sent.</p><p><a href="http://www.madisonphpconference.com">Return to the Conference website.</a></p>';
+$thankYou = '<p>Thank you, your message has been sent.</p><p><a href="https://www.madisonphpconference.com">Return to the Conference website.</a></p>';
 
 /* ******************************************************
 End change vars for new install
