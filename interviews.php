@@ -59,7 +59,6 @@
     $efs_sendName = "Madison PHP Conference";
     $efs_siteName = "Madison PHP Conference";
     $efs_filler_subject = "Interview Signup from the Madison PHP Conference Website";
-    $thankYou = '<p>Thank you for signing up. You will receive a confirmation email once your information has been processed. This may take 1-2 business days.</p><p><a href="https://www.madisonphpconference.com">Return to the Conference website.</a></p>';
 
     /* ******************************************************
     End change vars for new install
@@ -94,15 +93,38 @@
         $mailHeaders = "Reply-To: $efs_name <$efs_email>" . "\r\n" .
             "From: $efs_name <noreply@madisonphpconference.com>";
 
-        $wereAt = file_get_contents('/signups_number.txt');
-        file_put_contents('/signups.txt', "$wereAt - $efs_content", FILE_APPEND | LOCK_EX);
+        $numFile = fopen('/home/madisonp/subdomains/contact/signups_number.txt',"r+");
+        if (flock($numFile, LOCK_EX)) {
+            $wereAt = file_get_contents('/home/madisonp/subdomains/contact/signups_number.txt');
+            for($n; $n<strlen($wereAt);$n++) {
+                if(ctype_digit($wereAt[$n])){
+                    $newNum .= $wereAt[$n];
+                }
+            }
+
+            $newNum++;
+
+            file_put_contents('/home/madisonp/subdomains/contact/signups_number.txt', $newNum);
+            flock($numFile, LOCK_UN);
+            file_put_contents('/home/madisonp/subdomains/contact/signups.txt', "$newNum - $efs_content
+", FILE_APPEND | LOCK_EX);
+        }
 
         mail($efs_sendto, $efs_filler_subject, $efs_content, $mailHeaders);
 
-        echo "$thankYou";
+        echo '<p>Thank you for signing up';
+        if ($newNum > 15) {
+            echo ' for the WAITING LIST';
+        }
+        echo '. You will receive a confirmation email once your information has been processed. This may take 1-2 business days.</p><p><a href="https://www.madisonphpconference.com">Return to the Conference website.</a></p>';
     }
     else {
-        echo "Send an e-mail to the Madison PHP Conference organizers:<br />
+        echo "Sign up for ";
+        if (file_get_contents('/home/madisonp/subdomains/contact/signups_number.txt') > 15) {
+            echo "the WAITING LIST for ";
+        }
+
+        echo "the Speed Interview Session at the 2018 Madison PHP Conference:<br />
    <form action=\"{$_SERVER['REQUEST_URI']}\" method=\"post\">
    <p><strong>Name</strong><br />
    <input type=\"text\" name=\"name\" value=\"$efs_name\" maxlength=\"250\" size=\"100\" /></p>
@@ -112,8 +134,8 @@
    <input type=\"text\" name=\"phone\" value=\"$efs_phone\" maxlength=\"25\" size=\"25\" /></p>
    <p><strong>General Location</strong> (Example: East side of Madison, Middleton, Watertown, etc.<br />
    <input type=\"text\" name=\"location\" value=\"$efs_location\" maxlength=\"250\" size=\"100\" /></p>
-   <p><strong>Message</strong><br />
-   <textarea name=\"message\" cols=\"50\" rows=\"10\">$efs_message</textarea></p>
+   <p><strong>Give us a brief description of the kind of job you are looking for:</strong><br />
+   <input name=\"message\" value=\"$efs_message\" maxlength=\"250\" size=\"100\" /></p>
    <p><input type=\"submit\" name=\"submit\" value=\"Send\" /></p>
    </form>";
     }
